@@ -1,0 +1,54 @@
+<div class="items-form">
+	<form #form="ngForm">
+		<div>
+			<label for="name">Name: </label>
+			<input type="text" name="name" id="name" [(ngModel)]="items.name" required/>
+    </div>
+			<br />
+			<div>
+				<label for="des">Description: </label>
+				<input type="text" name="des" id="des"  [(ngModel)]="items.description"/>
+    </div>
+				<br />
+				<div>
+					<label for="price">Price: </label>
+					<input type="number" name="price" id="price" [(ngModel)]="items.price"/>
+    </div>
+					<br />
+					<div>
+						<label for="Image">Image: </label>
+						<input #inputFile
+        (change)="onFileSelected($event, 'FRONT')"
+        type="file"
+        id="Image"
+      />
+    </div>
+						<br />
+						<img [hidden]="!items.imageUrl" [src]="items.imageUrl" height="100" width="100" />
+						<br />
+						<button id="submit" (click)="onFormSubmit()">
+      Submit
+    </button>
+	</form>
+
+</div>
+<table>
+	<thead>
+		<tr>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of ItemList">
+			<td><img (click)="gotoItemDetail(item.id)"  [src]="item.imageUrl" height="100" width="100" /></td>
+			<td>{{item.name}}</td>
+			<td>{{item.description}}</td>
+			<td>{{item.price}}</td>
+			<td><button (click)="deleteItem(item.id)">Delete</button></td>
+		</tr>
+	</tbody>
+</table>
